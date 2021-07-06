@@ -12,7 +12,13 @@ import Colors from '../constants/Colors'
 import useColorScheme from '../hooks/useColorScheme'
 import TabOneScreen from '../screens/TabOneScreen'
 import TabTwoScreen from '../screens/TabTwoScreen'
-import {BottomTabParamList, TabOneParamList, TabTwoParamList} from '../types'
+import {MachineOverview} from '../screens/MachineOverview'
+import {
+    BottomTabParamList,
+    TabOneParamList,
+    TabTwoParamList,
+    MachineOverviewParamList,
+} from '../types'
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>()
 
@@ -36,6 +42,15 @@ export default function BottomTabNavigator() {
             <BottomTab.Screen
                 name="TabTwo"
                 component={TabTwoNavigator}
+                options={{
+                    tabBarIcon: ({color}: {color: string}) => (
+                        <TabBarIcon name="ios-code" color={color} />
+                    ),
+                }}
+            />
+            <BottomTab.Screen
+                name="MachineOverview"
+                component={MachineOverviewNavigator}
                 options={{
                     tabBarIcon: ({color}: {color: string}) => (
                         <TabBarIcon name="ios-code" color={color} />
@@ -82,5 +97,19 @@ function TabTwoNavigator() {
                 options={{headerTitle: 'Tab Two Title'}}
             />
         </TabTwoStack.Navigator>
+    )
+}
+
+const MachineOverviewStack = createStackNavigator<MachineOverviewParamList>()
+
+function MachineOverviewNavigator() {
+    return (
+        <MachineOverviewStack.Navigator>
+            <MachineOverviewStack.Screen
+                name="MachineOverviewScreen"
+                component={MachineOverview}
+                options={{headerTitle: 'Machines Overview'}}
+            />
+        </MachineOverviewStack.Navigator>
     )
 }
